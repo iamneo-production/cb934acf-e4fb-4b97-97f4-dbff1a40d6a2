@@ -1,0 +1,35 @@
+<div class="outer-container">
+    <div class="header">
+      <h1>Login</h1>
+    </div>
+    <form class="container mt-5" #loginForm="ngForm" (ngSubmit)="onSubmit()">
+      <div *ngIf="error" class="alert alert-danger" role="alert">
+        <strong>An Error Occured </strong>{{msg}}
+      </div>
+      <div class="col-sm-6 shadow round pb-3 px-5 pt-3 mx-auto">
+        <div class="mb-3">
+          <label class="form-label">Email : </label>
+          <input [(ngModel)]="user.email" #email="ngModel" type="email" class="form-control" placeholder="Enter Email" id="email" name="email" required pattern="^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$">
+          <div *ngIf="email.errors && (email.invalid && email.touched)">
+            <small class="text-danger" *ngIf="email.errors?.['required']">Email is a required field</small>
+            <small class="text-danger" *ngIf="email.errors?.['pattern']">Enter a valid Email</small>
+          </div>
+        </div>
+  
+        <div class="mb-3">
+          <label class="form-label">Password : </label>
+          <input [(ngModel)]="user.password" #password="ngModel" type="password" class="form-control " placeholder="Enter Password" id="password" name="password" required >
+          <div [class.d-none]="password.valid || password.untouched">
+            <small class="text-danger">Password is required.</small>
+          </div>
+        </div>
+  
+        <button class="btn btn-info mb-3" id="loginButton" type="submit" [disabled]="loginForm.form.invalid">Login</button>
+        <span class="form-label mb-3">
+          New User/admin? <a style="color: blue;" id="signupLink" (click)="signup()"> Sign Up </a>
+        </span>
+      </div>
+  
+    </form>
+  </div>
+  
