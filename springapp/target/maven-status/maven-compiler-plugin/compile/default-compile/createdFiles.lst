@@ -1,4 +1,7 @@
 com/examly/springapp/controller/SignupController.class
+com/examly/springapp/exception/CustomException.class
 com/examly/springapp/service/UserService.class
 com/examly/springapp/repository/UserRepo.class
 com/examly/springapp/entity/User.class
+com/examly/springapp/exception/MyExceptionHandler.class
+com/examly/springapp/controller/UserController.class
