@@ -13,11 +13,11 @@ export class LoginServiceService {
   constructor(private httpClient:HttpClient) { }
 
   public loginUserFromRemoteServer(user:User):Observable<any>{
-    return this.httpClient.post<any>("http://localhost:8080/user/login",user);
+    return this.httpClient.post<any>("https://8080-dffeebcffadededbccaaaccbedcbadfbddbcdbd.examlyiopb.examly.io/user/login",user);
   }
 
   public registerUserFromRemoteServer(user:User):Observable<any>{
-    return this.httpClient.post<any>("http://localhost:8080/user/signup",user)
+    return this.httpClient.post<any>("https://8080-dffeebcffadededbccaaaccbedcbadfbddbcdbd.examlyiopb.examly.io/user/signup",user)
       .pipe(catchError(this.errorHandler));
   }
 
