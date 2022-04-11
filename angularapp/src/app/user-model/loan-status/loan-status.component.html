@@ -1,0 +1,47 @@
+<app-nav-bar></app-nav-bar>
+<div class="testimonial" *ngIf="con == 0">
+  <div class="small-container">
+    <div class="col-3">
+      <h1>Track Your Loan Application</h1>
+      <form [formGroup]="loanStatus" (ngSubmit)="getLoanStatusFormData()">
+        <input  class="input-box" id="enterLoanId" type="text" placeholder="Enter your Loan id" value="" formControlName="loanId"/>
+        <br/>
+        <div  class="divlen"  *ngIf="loanId && loanId.invalid && loanId.touched">
+        <span style="color:red" *ngIf= "loanId.errors?.['required']">*Loan Id is Required. </span>
+        <span style="color:red" *ngIf= "loanId.errors?.['pattern']">Enter only Numbers. </span>
+        </div>
+        <button type="submit" name="button" class="btn" id="trackButton"><h3>Track</h3></button>
+      </form>
+    </div>
+  </div>
+</div>
+<div class="testimonial" *ngIf="con == 1">
+      <div class="small-container">
+        <div class="row">
+            <div class="col-3" id="statusGrid1">
+                <h3>Applicant name: Arul</h3>
+                <h3>Applicant phone no: 88888888</h3>
+                <h3>Applicant PAN no: xxxx</h3>
+                <h3>Applicant address: xxx</h3>
+                <h3>Applicant Loan Id: 032882123</h3>
+                <h3>Applicant Salary: 20000</h3>
+                <h3>Applicant Email: a@gmail.com</h3>
+                <h3>Applicant Addhaar: xxxx</h3>
+                <p class="btngreen"> Approved</p>
+            </div>
+            <div class="col-3" id="statusGrid2">
+                <h3>Applicant name: Arul</h3>
+                <h3>Applicant phone no: 88888888</h3>
+                <h3>Applicant PAN no: xxxx</h3>
+                <h3>Applicant address: xxx</h3>
+                <h3>Applicant Loan Id: 032882123</h3>
+                <h3>Applicant Salary: 20000</h3>
+                <h3>Applicant Email: a@gmail.com</h3>
+                <h3>Applicant Addhaar: xxxx</h3>
+                <p class="btn">Rejected</p>
+            </div>
+
+        </div>
+      </div>
+    </div>
+<router-outlet></router-outlet>
