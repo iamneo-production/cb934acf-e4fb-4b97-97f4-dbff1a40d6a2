@@ -1,6 +1,13 @@
 package com.examly.springapp.controller;
 
+import java.util.List;
+
+import com.examly.springapp.entity.User;
+import com.examly.springapp.service.UserService;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -10,66 +17,59 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
-import com.examly.springapp.service.UserService;
-import com.examly.springapp.entity.User;
-import com.examly.springapp.exception.CustomException;
-
 @RestController
 @RequestMapping("/user")
 public class UserController {
-    
+
     @Autowired
     private UserService userService;
 
-    @GetMapping("/getUser")
-    public List<User> getUsers() throws CustomException {
-        List<User> ls = this.userService.getAllUser();
+    @GetMapping("/getProfile")
+    public ResponseEntity<List<User>> viewProfile() {
+        List<User> ls = userService.getAllUser();
         if (ls.size() <= 0) {
-            throw new CustomException();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
-        return ls;
+        return ResponseEntity.status(HttpStatus.OK).body(ls);
     }
 
-    @GetMapping("/getUser/{userId}")
-    public User findUserById(@PathVariable("userId") int id) throws CustomException {
-        User user = null;
-        user = this.userService.getUserById(id);
-        if (user == null) {
-            throw new CustomException();
+    @GetMapping("/getProfile/{userId}")
+    public ResponseEntity<User> viewProfile(@PathVariable("userId") int id) {
+        User u = userService.getUserById(id);
+        if (u != null) {
+            return ResponseEntity.status(HttpStatus.OK).body(u);
         }
-        return user;
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
     }
 
-    @PostMapping("/addUser")
-    public User addUser(@RequestBody User user) throws CustomException {
-        User u = null;
+    @PostMapping("/addProfile")
+    public ResponseEntity<User> addProfile(@RequestBody User user) {
         try {
-            u = this.userService.saveUser(user);
-        } catch (Exception e) {
-            throw new CustomException();
+            User u = userService.addUser(user);
+            return ResponseEntity.status(HttpStatus.CREATED).body(u);
+        } catch (NullPointerException e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
-        return u;
     }
 
-    @PutMapping("/editUser/{userId}")
-    public String editUser(@RequestBody User user, @PathVariable("userId") int id) throws CustomException {
+    @PutMapping("/editProfile/{userId}")
+    public ResponseEntity<String> editProfile(@RequestBody User user, @PathVariable("userId") int id) {
         try {
-            this.userService.updateUser(user, id);
-        } catch (Exception e) {
-            throw new CustomException();
+            userService.updateUser(user, id);
+            return ResponseEntity.status(HttpStatus.CREATED).body("Updated Profile");
+        } catch (NullPointerException e) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).build();
         }
-
-        return "Successfully Edited";
     }
 
-    @DeleteMapping("/deleteUser/{userId}")
-    public String deleteUser(@PathVariable("userId") int id) throws CustomException {
+    @DeleteMapping("deleteProfile/{userId}")
+    public ResponseEntity<String> deleteProfile(@PathVariable("userId") int id) {
         try {
-            this.userService.deleteUser(id);
-        } catch (Exception e) {
-            throw new CustomException();
+            userService.deleteUser(id);
+            return ResponseEntity.status(HttpStatus.OK).body("Deleted Profile");
+        } catch (NullPointerException e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
-        return "Successfully Deleted";
     }
 }
+

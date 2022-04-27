@@ -1,14 +1,15 @@
 package com.examly.springapp.service;
-import com.examly.springapp.repository.UserRepo;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import com.examly.springapp.entity.User;
 
 import java.util.List;
 
+import com.examly.springapp.entity.User;
+import com.examly.springapp.repository.UserRepo;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 @Service
 public class UserService {
-
     @Autowired
     private UserRepo userRepo;
 
@@ -25,8 +26,7 @@ public class UserService {
     }
 
     public User getUserById(int id) {
-        User u = this.userRepo.findUserById(id);
-        return u;
+        return this.userRepo.findUserById(id);
     }
 
     public List<User> getAllUser() {
@@ -41,5 +41,9 @@ public class UserService {
     public void deleteUser(int id) {
         this.userRepo.deleteById(id);
     }
-    
+
+    public User addUser(User user) {
+        return userRepo.save(user);
+    }
 }
+
