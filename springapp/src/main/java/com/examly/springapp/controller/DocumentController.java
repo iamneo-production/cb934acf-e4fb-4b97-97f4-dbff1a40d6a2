@@ -17,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 @RestController
+@CrossOrigin(origins = "https://8081-dffeebcffadededbccaaaccbedcbadfbddbcdbd.examlyiopb.examly.io")
 public class DocumentController {
 
     @Autowired

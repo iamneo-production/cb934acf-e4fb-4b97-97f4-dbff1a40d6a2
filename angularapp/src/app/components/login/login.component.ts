@@ -2,9 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoginServiceService } from 'src/app/services/login-service.service';
+import { UserAuthServiceService } from 'src/app/services/user-auth-service.service';
 import { User } from 'src/app/user';
-
-
 
 @Component({
   selector: 'app-login',
@@ -13,14 +12,12 @@ import { User } from 'src/app/user';
 })
 export class LoginComponent implements OnInit {
 
-  msg=''
   user=new User()
-  error=false
-  constructor(
-    private router:Router, private loginService:LoginServiceService
-  ) { }
 
-  ngOnInit(): void {}
+  constructor(private router:Router, private loginService:LoginServiceService, private userAuthService:UserAuthServiceService) { }
+
+  ngOnInit(): void {
+  }
 
   exform=new FormGroup({
     'email':new FormControl('',[Validators.required, Validators.email]),
@@ -36,19 +33,21 @@ export class LoginComponent implements OnInit {
   }
 
   signup(){
-    this.router.navigateByUrl("register")
+    this.router.navigateByUrl("user/signup")
   }
 
   onSubmit(){
-    this.loginService.loginUserFromRemoteServer(this.user).subscribe(
-      data=>{
-        console.log("response received")
-      },
-      error=>{
-        console.log("exception occured")
-        this.error=true
-        this.msg="Invalid Credentials !! Please Enter valid EmailId and Password"
-      }
-    );
+    this.getAccessToken(this.user);
   }
+
+  public getAccessToken(user:any){
+    let resp=this.loginService.generateToken(user);
+    resp.subscribe(data=>{
+      this.userAuthService.setToken(JSON.stringify(data));
+      console.log(this.userAuthService.getToken());
+      this.router.navigateByUrl('user/addLoan');
+    });
+
+  }
+
 }

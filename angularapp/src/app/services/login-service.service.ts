@@ -10,18 +10,18 @@ import { User } from '../user';
 })
 export class LoginServiceService {
 
-  constructor(private httpClient:HttpClient) { }
+  constructor(private http:HttpClient) { }
 
-  public loginUserFromRemoteServer(user:User):Observable<any>{
-    return this.httpClient.post<any>("https://8080-dffeebcffadededbccaaaccbedcbadfbddbcdbd.examlyiopb.examly.io/user/login",user);
+  public generateToken(user:User){
+    return this.http.post("https://8080-dffeebcffadededbccaaaccbedcbadfbddbcdbd.examlyiopb.examly.io/user/login",user,{responseType: 'text' as 'json'})
   }
 
-  public registerUserFromRemoteServer(user:User):Observable<any>{
-    return this.httpClient.post<any>("https://8080-dffeebcffadededbccaaaccbedcbadfbddbcdbd.examlyiopb.examly.io/user/signup",user)
+  public registerUserFormRemoteServer(user:User):Observable<any>{
+    return this.http.post<any>("https://8080-dffeebcffadededbccaaaccbedcbadfbddbcdbd.examlyiopb.examly.io/user/signup",user)
       .pipe(catchError(this.errorHandler));
   }
 
   errorHandler(error:HttpErrorResponse){
-    return throwError(error || 'Server Error')
+    return throwError(error || 'Server Error');
   }
 }

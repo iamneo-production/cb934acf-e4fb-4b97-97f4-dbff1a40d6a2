@@ -1,40 +1,41 @@
 <div class="outer-container">
-  <div class="header">
-    <h1>Register</h1>
-  </div>
-  <form [formGroup]="exform" (ngSubmit)="onSignup()" class="mt-5">
-    <div class="col-sm-6 shadow round pb-3 px-5 pt-3 mx-auto">
-      <div class="form-group mb-3">
-        <label class="col-form-label">Role:</label>
-        <input formControlName="name" type="text" class="form-control">
-        <small *ngIf="name && name.invalid && name.touched" class="text-danger">Role is Required</small>
+    <div class="container">
+      <div class="heading">Register Here</div>
+      <form [formGroup]="exform" (ngSubmit)="onSubmit()">
+        <div *ngIf="err" class="alert alert-danger" role="alert">
+          <strong>An Error Occured </strong>{{msg}}
+        </div>
+        <div class="card-details">
+          <div class="card-box">
+            <span class="detaiils">Email</span>
+            <input id="email" [(ngModel)]="user.email" formControlName="email" type="text" placeholder="Enter your email address">
+            <small *ngIf="email && email.invalid && email.touched" class="text-danger">Email is mandatory</small>
+          </div>
+          <div class="card-box">
+            <span class="detaiils">Username</span>
+            <input id="username" [(ngModel)]="user.username" formControlName="username" pe="text" placeholder="Enter your username">
+            <small *ngIf="username && username.invalid && username.touched" class="text-danger">Username is mandatory</small>
+          </div>
+          <div class="card-box">
+            <span class="detaiils">Mobile Number</span>
+            <input id="mobileNumber" [(ngModel)]="user.mobileNumber" formControlName="mobileNumber" type="text" placeholder="Enter your mobile number">
+            <small *ngIf="mobileNumber && mobileNumber.invalid && mobileNumber.touched" class="text-danger">Mobile Number is required</small>
+          </div>
+          <div class="card-box">
+            <span class="detaiils">User-role</span>
+            <input id="admin/user" [(ngModel)]="user.userRole" formControlName="userRole" type="text" placeholder="Enter your user role">
+            <small *ngIf="userRole && userRole.invalid && userRole.touched" class="text-danger">User Role is required</small>
+          </div>
+          <div class="card-box">
+            <span class="detaiils">Password</span>
+            <input id="password" [(ngModel)]="user.password" formControlName="password" type="text" placeholder="Enter your password">
+            <small *ngIf="password && password.invalid && password.touched" class="text-danger">Password is required</small>
+          </div>
+        </div>
+        <div class="button">
+          <input id="signupButton" [disabled]="exform.invalid" type="submit" value="Sign Up">
+        </div>
+      </form>
       </div>
-      <div class="form-group mb-3">
-        <label class="col-form-label">Email:</label>
-        <input formControlName="email" type="text" class="form-control">
-        <small *ngIf="email && email.invalid && email.touched" class="text-danger">Email is Required</small>
-      </div>
-      <div class="form-group mb-3">
-        <label class="col-form-label">Username:</label>
-        <input formControlName="username" type="text" class="form-control">
-        <small *ngIf="username && username.invalid && username.touched" class="text-danger">Username is Required</small>
-      </div>
-      <div class="form-group mb-3">
-        <label class="col-form-label">Phone:</label>
-        <input formControlName="phone" type="text" class="form-control">
-        <small *ngIf="phone && (phone.invalid && phone.touched)" class="text-danger">Phone no. is Required(maximum 10 numbers and minimum 10 numbers allowed)</small>
-      </div>
-      <div class="form-group mb-3">
-        <label class="col-form-label">Password:</label>
-        <input formControlName="password" type="password" class="form-control">
-        <small *ngIf="password && password.invalid && password.touched" class="text-danger">Password is Required</small>
-      </div>
-
-      <button [disabled]="exform.invalid" type="button" class="btn btn-primary mt-3">Sign Up</button>
-      <span class="form-label mb-3">
-        Existing User/admin? <a style="color: blue;" id="loginLink" (click)="login()"> Login </a>
-      </span>
     </div>
-  </form>
-</div>
-
+    
