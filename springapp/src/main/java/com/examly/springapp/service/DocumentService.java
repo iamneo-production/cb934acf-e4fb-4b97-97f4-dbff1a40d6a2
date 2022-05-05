@@ -2,13 +2,14 @@ package com.examly.springapp.service;
 
 import java.io.IOException;
 
+import javax.servlet.http.HttpServletResponse;
+
 import com.examly.springapp.entity.DocumentModel;
-import com.examly.springapp.entity.User;
 import com.examly.springapp.repository.DocumentRepository;
-import com.examly.springapp.repository.UserRepo;
+import com.examly.springapp.repository.LoanRepository;
+import com.examly.springapp.entity.LoanApplicationModel;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
@@ -20,12 +21,23 @@ public class DocumentService {
     private DocumentRepository docRepo;
 
     @Autowired
-    private UserRepo userRepo;
+    private LoanRepository loanRepo;
 
-    public DocumentModel storeFile(MultipartFile file) throws Exception {
+    // Download File code
+    public byte[] getFile(int loanId, HttpServletResponse request) {
 
-        String email = SecurityContextHolder.getContext().getAuthentication().getName();
-        User u = userRepo.getUserByEmail(email);
+        DocumentModel doc = docRepo.getLoanByLoanId(loanId);
+        System.out.println("Doc contains: ");
+        System.out.println(doc);
+
+        request.setHeader("Content-Disposition", "attachment; filename=" + doc.getFileName());
+        return doc.getData();
+    }
+
+    //Upload file code
+    public DocumentModel storeFile(MultipartFile file, int loanId) throws Exception {
+
+        LoanApplicationModel l = loanRepo.getLoanByLoanId(loanId);
 
         // Normalize file name
         String fileName = StringUtils.cleanPath(file.getOriginalFilename());
@@ -34,9 +46,9 @@ public class DocumentService {
             if (fileName.contains("..")) {
                 throw new Exception("Sorry Filename contains invalid path " + file);
             }
-            DocumentModel dbFile = new DocumentModel(fileName, file.getContentType(), file.getBytes(), u);
+            DocumentModel dbFile = new DocumentModel(fileName, file.getContentType(), file.getBytes(), l);
 
-            dbFile.setUser(u);
+            dbFile.setLoan(l);
 
             return docRepo.save(dbFile);
         } catch (IOException ex) {

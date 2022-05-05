@@ -32,16 +32,21 @@ public class LoanApplicationModel {
     public LoanApplicationModel() {
     }
 
-    public LoanApplicationModel(String applicantName, String applicantAddress,
+    public LoanApplicationModel(int loanId, String loanType, String applicantName, String applicantAddress,
             String applicantMobile, String applicantEmail, String applicantAadhar, String applicantPan,
-            String applicantSalary) {
+            String applicantSalary, String loanAmountRequired, String loanRepaymentMonths, User user) {
+        this.loanId = loanId;
+        this.loanType = loanType;
         this.applicantName = applicantName;
         this.applicantAddress = applicantAddress;
         this.applicantMobile = applicantMobile;
         this.applicantEmail = applicantEmail;
         this.applicantAadhar = applicantAadhar;
         this.applicantPan = applicantPan;
-        this.applicantSalary = applicantSalary;       
+        this.applicantSalary = applicantSalary;
+        this.loanAmountRequired = loanAmountRequired;
+        this.loanRepaymentMonths = loanRepaymentMonths;
+        this.user = user;
     }
 
     public int getLoanId() {

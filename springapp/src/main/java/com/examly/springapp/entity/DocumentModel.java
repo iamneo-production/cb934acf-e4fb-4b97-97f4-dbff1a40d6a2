@@ -1,6 +1,8 @@
 package com.examly.springapp.entity;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
@@ -10,6 +12,8 @@ import javax.persistence.ManyToOne;
 public class DocumentModel {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
     private String fileName;
     private String fileType;
 
@@ -17,25 +21,25 @@ public class DocumentModel {
     private byte[] data;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
+    @JoinColumn(name = "loan_id")
+    private LoanApplicationModel loan;
 
     public DocumentModel() {
     }
 
-    public DocumentModel(String fileName, String fileType, byte[] data, User user) {
+    public DocumentModel(String fileName, String fileType, byte[] data, LoanApplicationModel loan) {
         this.fileName = fileName;
         this.fileType = fileType;
         this.data = data;
-        this.user = user;
+        this.loan = loan;
     }
 
-    public User getUser() {
-        return user;
+    public LoanApplicationModel getLoan() {
+        return loan;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setLoan(LoanApplicationModel loan) {
+        this.loan = loan;
     }
 
     public String getFileType() {
