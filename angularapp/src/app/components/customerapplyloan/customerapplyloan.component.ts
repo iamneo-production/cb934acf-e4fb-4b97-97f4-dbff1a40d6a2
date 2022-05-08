@@ -20,6 +20,10 @@ export class CustomerapplyloanComponent implements OnInit {
   fileName:string='';
   msg:any={}
   err=false
+  loanId:any=''
+  status:number=0
+  btnNotClicked:boolean=true
+  file:any={}
 
   constructor(private userAuthService:UserAuthServiceService, private router:Router, private laonService:ApplyLoanService,
     private loginService:LoginServiceService) {
@@ -37,9 +41,10 @@ export class CustomerapplyloanComponent implements OnInit {
       'applicantEmail':new FormControl('',[Validators.required, Validators.email]),
       'applicantAadhar':new FormControl('',[Validators.required, Validators.minLength(12), Validators.maxLength(12), Validators.pattern("^[1-9][0-9]+$")]),
       'applicantPan':new FormControl('',[Validators.required, Validators.pattern("^([A-Z]){5}([0-9]){4}([A-Z]){1}$")]),
-      'applicantSalary':new FormControl('',[Validators.required, Validators.pattern("^[1-9][0-9]+$")]),
-      'loanAmountRequired':new FormControl('',[Validators.required, Validators.pattern("^[1-9][0-9]+$")]),
-      'selectItemList':new FormControl('',[Validators.required])
+      'applicantSalary':new FormControl('',[Validators.required, Validators.pattern("^[1-9][0-9]+$"), Validators.minLength(5)]),
+      'loanAmountRequired':new FormControl('',[Validators.required, Validators.pattern("^[1-9][0-9]+$"), Validators.minLength(6)]),
+      'selectItemList':new FormControl('',[Validators.required]),
+      'loanRepaymentMonths':new FormControl('',[Validators.required])
     }
   )
 
@@ -75,22 +80,24 @@ export class CustomerapplyloanComponent implements OnInit {
     return this.loanForm.get('loanAmountRequired')
   }
 
+  get loanRepaymentMonths(){
+    return this.loanForm.get('loanRepaymentMonths')
+  }
+
   get selectItemList(){
     return this.loanForm.get('selectItemList')
   }
 
   selectChangeHandler(event:any){
     this.selectedType=event.target.value;
-    console.log(this.selectedType)
     if(this.selectedType===null || this.selectedType===''){
       this.type=!this.type
     }
   }
 
   save(event:any){
-    let selectFile=event.target.files[0]
-    this.fileName=selectFile.name
-    console.log(this.fileName)
+    this.file=event.target.files[0]
+    this.fileName=this.file.name
     if(this.fileName===null || this.fileName===''){
       this.name=!this.name
     }
@@ -105,15 +112,22 @@ export class CustomerapplyloanComponent implements OnInit {
     this.router.navigateByUrl("user/addLoan");
   }
 
+
+
   loanStatus(){
     this.router.navigateByUrl("user/viewLoan");
   }
 
+  profile(){
+    this.router.navigateByUrl("user/getProfile")
+  }
+
   public applyLoan(){
     this.laonService.applyForLoan(this.loan).subscribe(data=>{
-      console.log(data)
+      sessionStorage.setItem("userData",JSON.stringify(data))
       this.userAuthService.setLoanId(JSON.stringify(data.loanId));
-      this.router.navigateByUrl("user/loanApplied", {skipLocationChange:true});
+      this.loanId=sessionStorage.getItem("loanId")
+      this.btnNotClicked=false
     },
     error=>{
       console.log(error)
@@ -122,4 +136,30 @@ export class CustomerapplyloanComponent implements OnInit {
     }
     )
   }
+
+  uploadDocument(){
+    const formData=new FormData();
+    formData.append('file',this.file,this.fileName)
+    this.loanId=sessionStorage.getItem("loanId")
+    this.laonService.uploadFile(formData,this.loanId).subscribe(
+      event=>{
+      },
+      error=>{
+        document.documentElement.scrollTop = 0;
+        this.err=true
+        if(error.status===201){
+          this.status=201
+          this.msg="Loan Applied and File Uploaded Successfully"
+          setTimeout(()=>{
+            this.router.navigateByUrl("user/loanApplied", {skipLocationChange:true});
+          }, 2000);
+        }
+        else if(error.status===500){
+          this.status=500
+          this.msg="Loan Application Failed!! File Size Exceeded"
+        }
+      }
+    );
+  }
+
 }

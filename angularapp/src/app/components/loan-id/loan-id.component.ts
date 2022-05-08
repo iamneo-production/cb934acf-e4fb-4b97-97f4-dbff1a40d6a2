@@ -29,6 +29,10 @@ export class LoanIdComponent implements OnInit {
     this.router.navigateByUrl("user/viewLoan")
   }
 
+  profile(){
+    this.router.navigateByUrl("user/getProfile")
+  }
+
   loanId=this.userAuthService.getLoanId();
 
 }

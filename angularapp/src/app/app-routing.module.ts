@@ -25,6 +25,21 @@ const routes: Routes = [
     path:'user/loanApplied',
     loadChildren:()=>import('./components/loan-id/loan-id.module').then(m=>m.LoanIdModule),
     canActivate: [AuthGuardGuard]
+  },
+  {
+    path: 'user/viewLoan',
+    loadChildren:()=>import('./components/track-loan/track-loan.module').then(m=>m.TrackLoanModule),
+    canActivate: [AuthGuardGuard]
+  },
+  {
+    path: 'user/viewLoan/status',
+    loadChildren:()=>import('./components/view-loan/view-loan.module').then(m=>m.ViewLoanModule),
+    canActivate: [AuthGuardGuard]
+  },
+  {
+    path: 'user/getProfile',
+    loadChildren: ()=>import('./components/customerprofile/customerprofile.module').then(m=>m.CustomerprofileModule),
+    canActivate: [AuthGuardGuard]
   }
 ];
 

@@ -1,4 +1,4 @@
-import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
@@ -25,6 +25,57 @@ export class ApplyLoanService {
       })
     })
         .pipe(catchError(this.errorHandler))
+  }
+
+  public uploadFile(formData: FormData, loanId:string):Observable<any>{
+    return this.http.post<any>("https://8080-dffeebcffadededbccaaaccbedcbadfbddbcdbd.examlyiopb.examly.io/uploadFile",formData,{
+
+      headers: new HttpHeaders({
+        Authorization: `Bearer ${this.newToken}`
+      }),
+      params: new HttpParams().set('loanId',loanId)
+    })
+    .pipe(catchError(this.errorHandler))
+  }
+
+  public downloadFile(loanId:string):Observable<any>{
+    return this.http.get("https://8080-dffeebcffadededbccaaaccbedcbadfbddbcdbd.examlyiopb.examly.io/downloadFile",{
+      headers: new HttpHeaders({
+        Authorization: `Bearer ${this.newToken}`
+      }),
+
+      params: new HttpParams().set('loanId',loanId),
+
+      responseType: 'arraybuffer'
+    },
+    )
+    .pipe(catchError(this.errorHandler))
+  }
+
+  public downloadFileName(loanId:string):Observable<any>{
+    return this.http.get("https://8080-dffeebcffadededbccaaaccbedcbadfbddbcdbd.examlyiopb.examly.io/fileName",{
+      headers: new HttpHeaders({
+        Authorization: `Bearer ${this.newToken}`
+      }),
+
+      params: new HttpParams().set('loanId',loanId),
+      responseType: 'text' as 'json'
+    },
+    )
+    .pipe(catchError(this.errorHandler))
+  }
+
+  public downloadFileType(loanId:string):Observable<any>{
+    return this.http.get("https://8080-dffeebcffadededbccaaaccbedcbadfbddbcdbd.examlyiopb.examly.io/fileType",{
+      headers: new HttpHeaders({
+        Authorization: `Bearer ${this.newToken}`
+      }),
+
+      params: new HttpParams().set('loanId',loanId),
+      responseType: 'text' as 'json'
+    },
+    )
+    .pipe(catchError(this.errorHandler))
   }
 
   errorHandler(error:HttpErrorResponse){

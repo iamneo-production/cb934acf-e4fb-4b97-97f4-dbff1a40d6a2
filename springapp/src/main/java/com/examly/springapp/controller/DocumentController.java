@@ -49,5 +49,16 @@ public class DocumentController {
         return documentService.getFile(loanId, response);
     }
 
+    
+    @GetMapping("/fileName")
+    public String getFileName(@RequestParam("loanId") int loanId, HttpServletResponse response) {
+        return documentService.getFileName(loanId, response);
+    }
+
+    @GetMapping("/fileType")
+    public String getFileType(@RequestParam("loanId") int loanId, HttpServletResponse response) {
+        return documentService.getFileType(loanId, response);
+    }
+
 }
 

@@ -13,6 +13,10 @@ import { User } from 'src/app/user';
 export class LoginComponent implements OnInit {
 
   user=new User()
+  msg:any={}
+  err=false
+  status:number=0
+  token:any=''
 
   constructor(private router:Router, private loginService:LoginServiceService, private userAuthService:UserAuthServiceService) { }
 
@@ -44,10 +48,25 @@ export class LoginComponent implements OnInit {
     let resp=this.loginService.generateToken(user);
     resp.subscribe(data=>{
       this.userAuthService.setToken(JSON.stringify(data));
-      console.log(this.userAuthService.getToken());
-      this.router.navigateByUrl('user/addLoan');
-    });
-
+      this.token= this.userAuthService.getToken();
+      if(this.token!==null || this.token!==''){
+        this.err=true
+        this.status=200
+        this.msg="We are redirecting you to the Loan Page"
+          setTimeout(()=>{
+            this.router.navigateByUrl('user/addLoan');
+        }, 2000);
+      }
+    },
+    error=>{
+      console.log(error)
+      this.err=true
+      if(error.status===500){
+        this.status=500
+        this.msg="Invalid username or password!! Try again..."
+      }
+    }
+    );
   }
 
 }

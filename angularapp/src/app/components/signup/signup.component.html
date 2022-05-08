@@ -1,41 +1,35 @@
+
 <div class="outer-container">
-    <div class="container">
-      <div class="heading">Register Here</div>
-      <form [formGroup]="exform" (ngSubmit)="onSubmit()">
-        <div *ngIf="err" class="alert alert-danger" role="alert">
-          <strong>An Error Occured </strong>{{msg}}
-        </div>
-        <div class="card-details">
-          <div class="card-box">
-            <span class="detaiils">Email</span>
-            <input id="email" [(ngModel)]="user.email" formControlName="email" type="text" placeholder="Enter your email address">
-            <small *ngIf="email && email.invalid && email.touched" class="text-danger">Email is mandatory</small>
-          </div>
-          <div class="card-box">
-            <span class="detaiils">Username</span>
-            <input id="username" [(ngModel)]="user.username" formControlName="username" pe="text" placeholder="Enter your username">
-            <small *ngIf="username && username.invalid && username.touched" class="text-danger">Username is mandatory</small>
-          </div>
-          <div class="card-box">
-            <span class="detaiils">Mobile Number</span>
-            <input id="mobileNumber" [(ngModel)]="user.mobileNumber" formControlName="mobileNumber" type="text" placeholder="Enter your mobile number">
-            <small *ngIf="mobileNumber && mobileNumber.invalid && mobileNumber.touched" class="text-danger">Mobile Number is required</small>
-          </div>
-          <div class="card-box">
-            <span class="detaiils">User-role</span>
-            <input id="admin/user" [(ngModel)]="user.userRole" formControlName="userRole" type="text" placeholder="Enter your user role">
-            <small *ngIf="userRole && userRole.invalid && userRole.touched" class="text-danger">User Role is required</small>
-          </div>
-          <div class="card-box">
-            <span class="detaiils">Password</span>
-            <input id="password" [(ngModel)]="user.password" formControlName="password" type="text" placeholder="Enter your password">
-            <small *ngIf="password && password.invalid && password.touched" class="text-danger">Password is required</small>
-          </div>
-        </div>
-        <div class="button">
-          <input id="signupButton" [disabled]="exform.invalid" type="submit" value="Sign Up">
-        </div>
-      </form>
+  <div class="container">
+    <h1>Register</h1>
+    <form [formGroup]="exform" (ngSubmit)="onSubmit()">
+      <div class="textbox">
+        <i class="fas fa-envelope"></i>
+        <input [(ngModel)]="user.email" formControlName="email" type="text" placeholder="Email Id"><br>
+        <small *ngIf="email && email.invalid && email.touched" class="text-danger">Email is mandatory</small>
       </div>
-    </div>
-    
+      <div class="textbox">
+        <i class="fas fa-user"></i>
+        <input [(ngModel)]="user.username" formControlName="username" type="text" placeholder="Username">
+        <small *ngIf="username && username.invalid && username.touched" class="text-danger">Username is mandatory</small>
+      </div>
+      <div class="textbox">
+        <i class="fas fa-phone"></i>
+        <input [(ngModel)]="user.mobileNumber" formControlName="mobileNumber" type="text" placeholder="Contact Number"><br>
+        <small *ngIf="mobileNumber && mobileNumber.invalid && mobileNumber.touched" class="text-danger">Mobile Number is required</small>
+      </div>
+      <div class="textbox">
+        <i class="fab fa-critical-role"></i>
+        <input [(ngModel)]="user.userRole" formControlName="userRole" type="text" placeholder="User Role"><br>
+        <small *ngIf="userRole && userRole.invalid && userRole.touched" class="text-danger">User Role is required</small>
+      </div>
+      <div class="textbox">
+        <i class="fas fa-lock"></i>
+        <input [(ngModel)]="user.password" formControlName="password" type="password" placeholder="Password">
+        <small *ngIf="password && password.invalid && password.touched" class="text-danger">Password is required</small>
+      </div>
+      <input [disabled]="exform.invalid" type="submit" class="btn" value="Sign Up">
+    </form>
+
+  </div>
+</div>

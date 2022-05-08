@@ -9,6 +9,8 @@ import { LoginModule } from './components/login/login.module';
 import { SignupModule } from './components/signup/signup.module';
 import { CustomerapplyloanModule } from './components/customerapplyloan/customerapplyloan.module';
 import { LoanIdModule } from './components/loan-id/loan-id.module';
+import { ViewLoanModule } from './components/view-loan/view-loan.module';
+import { TrackLoanModule } from './components/track-loan/track-loan.module';
 
 @NgModule({
   declarations: [
@@ -23,7 +25,9 @@ import { LoanIdModule } from './components/loan-id/loan-id.module';
     LoginModule,
     SignupModule,
     CustomerapplyloanModule,
-    LoanIdModule
+    LoanIdModule,
+    ViewLoanModule,
+    TrackLoanModule
   ],
   providers: [
     

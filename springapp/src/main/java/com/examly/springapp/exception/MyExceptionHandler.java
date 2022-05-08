@@ -21,4 +21,9 @@ public class MyExceptionHandler {
     public ResponseEntity<Object> myMessage(SignupException s) {
         return new ResponseEntity<>(s.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
     }
+
+    @ExceptionHandler(DocumentException.class)
+    public ResponseEntity<Object> myMessage(DocumentException s) {
+        return new ResponseEntity<>(s.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+    }
 }

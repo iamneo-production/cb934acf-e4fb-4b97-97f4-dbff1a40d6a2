@@ -67,6 +67,7 @@
     background-image: linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0.75)), url(src/assets/images/car-insurance.jpg);
     background-position: center;
     background-size: cover;
+    flex-direction: column;
   }
   
   .container{
@@ -77,6 +78,11 @@
     min-height: 100vh;
     background: linear-gradient(rgba(143, 5, 5, 0.3),rgba(10, 4, 73, 0.3));
     margin-top: 100px;
+  }
+
+  .alert{
+    max-width: 800px;
+    width: 100%;
   }
   
   .container .heading{
@@ -113,12 +119,6 @@
     width: 100%;
   }
   
-  /* .card-details .card-box .detaiils{
-    display: block;
-    font-weight: 500;
-    margin-bottom: 5px;
-  } */
-  
   .card-details .card-box input{
     height: 45px;
     width: 100%;
@@ -135,25 +135,6 @@
   .card-details .card-box input:valid{
     border-color: #9b59b6;
   }
-/*   
-  form .button{
-    text-align: center;
-  }
-  
-  form .button input{
-    padding: 10px 0;
-    margin-top: 10px;
-    height: 100%;
-    width: 50%;
-    outline: none;
-    color: #fff;
-    border: none;
-    font-size: 18px;
-    font-weight: 500;
-    border-radius: 25px;
-    letter-spacing: 1px;
-    background: linear-gradient(135deg, rgba(247, 136, 136, 0.5), rgba(29, 39, 129, 0.5));
-  } */
 
   .track-loan{
     width: 200px;
@@ -174,10 +155,29 @@
   box-shadow: 0 5px 15px rgba(145, 92, 182, .4);
 }
 
-  
-  /* form .button input:hover{
-    background: linear-gradient(-135deg, rgba(247, 136, 136, 0.5), rgba(29, 39, 129, 0.5));
-  } */
+form .button{
+  text-align: center;
+}
+
+form .button input{
+  padding: 10px 0;
+  margin-top: 10px;
+  height: 100%;
+  width: 50%;
+  outline: none;
+  color: #fff;
+  border: none;
+  font-size: 18px;
+  font-weight: 500;
+  border-radius: 25px;
+  letter-spacing: 1px;
+  background: linear-gradient(rgba(143, 5, 5, 0.3),rgba(10, 4, 73, 0.3));
+}
+
+form .button input:hover{
+  background: linear-gradient(135deg, #989bec, #fcc3c3ca);
+}
+
   
   #myFile{
     border: none;

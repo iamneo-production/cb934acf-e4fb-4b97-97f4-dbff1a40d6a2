@@ -27,6 +27,10 @@ public class LoanService {
         return loanRepo.findAll();
     }
 
+    public LoanApplicationModel getLoanById(int loanId) {
+        return loanRepo.getLoanByLoanId(loanId);
+    }
+
     public List<LoanApplicationModel> getLoan() {
         String email=SecurityContextHolder.getContext().getAuthentication().getName();
         User u = userRepo.getUserByEmail(email);

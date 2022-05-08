@@ -4,6 +4,7 @@ com/examly/springapp/filter/JwtFilter.class
 com/examly/springapp/exception/SignupException.class
 com/examly/springapp/entity/LoanApplicationModel.class
 com/examly/springapp/entity/LoginModel.class
+com/examly/springapp/exception/DocumentException.class
 com/examly/springapp/repository/LoanRepository.class
 com/examly/springapp/repository/DocumentRepository.class
 com/examly/springapp/exception/CustomException.class

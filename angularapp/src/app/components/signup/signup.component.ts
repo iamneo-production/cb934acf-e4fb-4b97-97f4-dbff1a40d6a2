@@ -55,11 +55,9 @@ export class SignupComponent implements OnInit {
   onSubmit(){
     this.loginService.registerUserFormRemoteServer(this.user).subscribe(
       data=>{
-        console.log("Registration Successful")
         this.router.navigateByUrl("user/login");
       },
       error=>{
-        console.log("Registration Unsuccessful")
         this.err=true
         this.msg=error.error
       }

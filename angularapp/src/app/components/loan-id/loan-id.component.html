@@ -9,7 +9,7 @@
            <ul class="navbar-nav ms-auto">
               <li><a (click)="applyLoan()" id="applyLoan">Apply Loan</a></li>
               <li><a (click)="loanStatus()" id="loanStatus">Loan Status</a></li>
-              <li><a href="#" id="profile">Profile</a></li>
+              <li><a (click)="profile()" id="profile">Profile</a></li>
               <li><a (click)="logout()" id="logout">Logout</a></li>
           </ul>
         </div>
@@ -20,7 +20,7 @@
       <h1>Thank You for Applying Loan</h1>
       <p>Your loan has been submitted successfully. Your Loan ID is : <strong>{{loanId}}</strong><br>Track your Application to get the status of your loan</p>
       <div>
-        <button class="track-loan" type="button"><span></span>Track Loan</button>
+        <button (click)="profile()" class="track-loan" type="button"><span></span>Track Loan</button>
       </div>
     </div>
   </div>

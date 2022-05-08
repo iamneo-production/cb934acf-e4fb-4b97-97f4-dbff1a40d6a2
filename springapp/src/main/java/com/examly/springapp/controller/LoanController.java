@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -27,12 +28,12 @@ public class LoanController {
     private LoanService loanService;
 
     @GetMapping("/viewLoan")
-    public ResponseEntity<List<LoanApplicationModel>> viewLoan() {
-        List<LoanApplicationModel> ls = loanService.getLoan();
-        if (ls == null) {
+    public ResponseEntity<LoanApplicationModel> viewLoan(@RequestParam("loanId") int loanId) {
+        LoanApplicationModel l = loanService.getLoanById(loanId);
+        if (l == null) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
-        return ResponseEntity.status(HttpStatus.OK).body(ls);
+        return ResponseEntity.status(HttpStatus.OK).body(l);
     }
 
     @PutMapping("/editLoan/{loanId}")
