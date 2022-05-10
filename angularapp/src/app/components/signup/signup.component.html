@@ -19,11 +19,6 @@
         <small *ngIf="mobileNumber && mobileNumber.invalid && mobileNumber.touched" class="text-danger">Mobile Number is required</small>
       </div>
       <div class="textbox">
-        <i class="fab fa-critical-role"></i>
-        <input [(ngModel)]="user.userRole" formControlName="userRole" type="text" placeholder="User Role"><br>
-        <small *ngIf="userRole && userRole.invalid && userRole.touched" class="text-danger">User Role is required</small>
-      </div>
-      <div class="textbox">
         <i class="fas fa-lock"></i>
         <input [(ngModel)]="user.password" formControlName="password" type="password" placeholder="Password">
         <small *ngIf="password && password.invalid && password.touched" class="text-danger">Password is required</small>

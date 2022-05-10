@@ -40,6 +40,14 @@ const routes: Routes = [
     path: 'user/getProfile',
     loadChildren: ()=>import('./components/customerprofile/customerprofile.module').then(m=>m.CustomerprofileModule),
     canActivate: [AuthGuardGuard]
+  },
+  {
+    path: 'admin/appliedLoan',
+    loadChildren: ()=>import('./components/adminappliedloan/adminappliedloan.module').then(m=>m.AdminappliedloanModule)
+  },
+  {
+    path: 'admin/trackLoan',
+    loadChildren: ()=>import('./components/adminapprovedloan/adminapprovedloan.module').then(m=>m.AdminapprovedloanModule)
   }
 ];
 

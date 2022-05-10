@@ -24,7 +24,6 @@ export class SignupComponent implements OnInit {
     'email':new FormControl('',[Validators.required, Validators.email]),
     'username':new FormControl('',[Validators.required, Validators.pattern("^[A-Za-z]+$")]),
     'mobileNumber': new FormControl('',[Validators.required, Validators.minLength(10), Validators.maxLength(10), Validators.pattern("^[6-9][0-9]+$")]),
-    'userRole': new FormControl('',[Validators.required, Validators.pattern("^[A-Za-z]+$")]),
     'password':new FormControl('',[Validators.required, Validators.maxLength(20), Validators.minLength(8)])
   })
 
@@ -42,10 +41,6 @@ export class SignupComponent implements OnInit {
 
   get mobileNumber(){
     return this.exform.get('mobileNumber')
-  }
-
-  get userRole(){
-    return this.exform.get('userRole')
   }
 
   login(){
