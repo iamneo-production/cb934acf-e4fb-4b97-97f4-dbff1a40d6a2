@@ -1,6 +1,5 @@
 export class Loan {
   loanId:number=0
-  loanType:string=''
   applicantName:string=''
   applicantAddress:string=''
   applicantMobile:string=''

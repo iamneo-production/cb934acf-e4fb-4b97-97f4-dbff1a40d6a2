@@ -20,5 +20,6 @@ com/examly/springapp/controller/SignupController.class
 com/examly/springapp/entity/DocumentModel.class
 com/examly/springapp/controller/LoanController.class
 com/examly/springapp/repository/UserRepo.class
+com/examly/springapp/service/AdminService.class
 com/examly/springapp/service/LoanService.class
 com/examly/springapp/controller/DocumentController.class

@@ -29,12 +29,14 @@ public class LoanApplicationModel {
     @JoinColumn(name = "user_id")
     private User user;
 
+    private double monthlyEmi;
+
     public LoanApplicationModel() {
     }
 
     public LoanApplicationModel(int loanId, String loanType, String applicantName, String applicantAddress,
             String applicantMobile, String applicantEmail, String applicantAadhar, String applicantPan,
-            String applicantSalary, String loanAmountRequired, String loanRepaymentMonths, User user) {
+            String applicantSalary, String loanAmountRequired, String loanRepaymentMonths, User user, double monthlyEmi) {
         this.loanId = loanId;
         this.loanType = loanType;
         this.applicantName = applicantName;
@@ -47,6 +49,15 @@ public class LoanApplicationModel {
         this.loanAmountRequired = loanAmountRequired;
         this.loanRepaymentMonths = loanRepaymentMonths;
         this.user = user;
+        this.monthlyEmi=monthlyEmi;
+    }
+
+    public double getMonthlyEmi() {
+        return monthlyEmi;
+    }
+
+    public void setMonthlyEmi(double monthlyEmi) {
+        this.monthlyEmi = monthlyEmi;
     }
 
     public int getLoanId() {
