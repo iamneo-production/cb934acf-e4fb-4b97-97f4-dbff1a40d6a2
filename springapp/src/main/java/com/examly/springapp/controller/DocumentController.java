@@ -21,7 +21,8 @@ import com.examly.springapp.entity.DocumentModel;
 import com.examly.springapp.service.DocumentService;
 
 @RestController
-@CrossOrigin(origins = "https://8081-dffeebcffadededbccaaaccbedcbadfbddbcdbd.examlyiopb.examly.io")
+@CrossOrigin(origins = "http://localhost:8081")
+// @CrossOrigin(origins = "https://8081-dffeebcffadededbccaaaccbedcbadfbddbcdbd.examlyiopb.examly.io")
 public class DocumentController {
 
     @Autowired

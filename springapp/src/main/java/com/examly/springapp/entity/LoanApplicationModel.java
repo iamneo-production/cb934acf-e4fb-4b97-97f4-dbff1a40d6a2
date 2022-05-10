@@ -18,7 +18,7 @@ public class LoanApplicationModel {
     private String applicantAddress;
     private String applicantMobile;
     private String applicantEmail;
-    private String applicantAadhaar;
+    private String applicantAadhar;
     private String applicantPan;
     private String applicantSalary;
     private String loanAmountRequired;
@@ -40,7 +40,7 @@ public class LoanApplicationModel {
 
 
 	public LoanApplicationModel(int loanId, String loanType, String applicantName, String applicantAddress,
-			String applicantMobile, String applicantEmail, String applicantAadhaar, String applicantPan,
+			String applicantMobile, String applicantEmail, String applicantAadhar, String applicantPan,
 			String applicantSalary, String loanAmountRequired, String loanRepaymentMonths, User user,
 			double monthlyEmi) {
 		super();
@@ -50,7 +50,7 @@ public class LoanApplicationModel {
 		this.applicantAddress = applicantAddress;
 		this.applicantMobile = applicantMobile;
 		this.applicantEmail = applicantEmail;
-		this.applicantAadhaar = applicantAadhaar;
+		this.applicantAadhar = applicantAadhar;
 		this.applicantPan = applicantPan;
 		this.applicantSalary = applicantSalary;
 		this.loanAmountRequired = loanAmountRequired;
@@ -109,12 +109,12 @@ public class LoanApplicationModel {
         this.applicantEmail = applicantEmail;
     }
 
-    public String getApplicantAadhaar() {
-        return applicantAadhaar;
+    public String getApplicantAadhar() {
+        return applicantAadhar;
     }
 
-    public void setApplicantAadhar(String applicantAadhaar) {
-        this.applicantAadhaar = applicantAadhaar;
+    public void setApplicantAadhar(String applicantAadhar) {
+        this.applicantAadhar = applicantAadhar;
     }
 
     public String getApplicantPan() {
