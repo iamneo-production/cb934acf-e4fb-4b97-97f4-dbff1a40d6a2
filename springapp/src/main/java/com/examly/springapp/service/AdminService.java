@@ -64,6 +64,9 @@ public class AdminService {
     public List<LoanApplicationModel> getAllLoans() {
         return loanRepo.findAll();
     }
+	public LoanApplicationModel getLoanById(int loanId) {
+    	return loanRepo.getLoanByLoanId(loanId);
+    }
     
     
     public LoanApplicationModel generateSchedule(int loanId) {

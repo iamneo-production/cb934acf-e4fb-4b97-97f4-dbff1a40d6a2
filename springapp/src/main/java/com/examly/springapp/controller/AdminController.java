@@ -89,7 +89,14 @@ public class AdminController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
-    
+    @GetMapping("/getLoan/{loanId}")
+    public ResponseEntity<LoanApplicationModel> getLoanById(@PathVariable("loanId") int id){
+    	LoanApplicationModel ln = adminService.getLoanById(id);
+    	if(ln == null) {
+    		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+    	}
+    	return ResponseEntity.status(HttpStatus.OK).body(ln);
+    }
 
     @GetMapping("/getAllLoans")
     public ResponseEntity<List<LoanApplicationModel>> getAllLoans() {

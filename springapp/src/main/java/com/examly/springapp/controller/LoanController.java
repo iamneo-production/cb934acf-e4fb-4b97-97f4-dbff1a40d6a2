@@ -50,7 +50,7 @@ public class LoanController {
     public ResponseEntity<LoanApplicationModel> addLoan(@RequestBody LoanApplicationModel loan) {
         LoanApplicationModel l = loanService.addLoan(loan);
         if (l != null) {
-            return ResponseEntity.status(HttpStatus.CREATED).body(l);
+            return ResponseEntity.status(HttpStatus.OK).body(l);
         }
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
     }
