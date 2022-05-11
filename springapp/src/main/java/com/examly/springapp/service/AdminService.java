@@ -47,14 +47,21 @@ public class AdminService {
 	    
 	}
 	public void editLoan(LoanApplicationModel loan, int id) {
-        loan.setLoanId(id);
+		LoanApplicationModel ln = loanRepo.getLoanByLoanId(id);
+        ln.setLoanId(id);
         if(loan.getLoanType().toLowerCase().equals("approve")) {
+			ln.setLoanType("approve");
 			double emi = Integer.valueOf(loan.getLoanAmountRequired())/Integer.valueOf(loan.getLoanRepaymentMonths());
-	    	loan.setMonthlyEmi(emi);
-		}else {
-			loan.setMonthlyEmi(0);
+	    	ln.setMonthlyEmi(emi);
+		}else if(loan.getLoanType().toLowerCase().equals("reject")){
+			ln.setLoanType("reject");
+			ln.setMonthlyEmi(0);
 		}
-        loanRepo.save(loan);
+		else {
+			ln.setLoanType("pending");
+			ln.setMonthlyEmi(0);
+		}
+        loanRepo.save(ln);
     }
 
     public void deleteLoan(int id) {
