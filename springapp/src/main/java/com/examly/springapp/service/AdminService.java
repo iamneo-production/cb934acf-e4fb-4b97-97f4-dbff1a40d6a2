@@ -27,25 +27,46 @@ public class AdminService {
 	private DocumentRepository docRepo;
 	
 	public LoanApplicationModel approveLoan(LoanApplicationModel loan) {
-		if(loan.getLoanType().equals("Approve")) {
+		LoanApplicationModel ln = loanRepo.getLoanByLoanId(loan.getLoanId());
+        ln.setLoanId(loan.getLoanId());
+        if(loan.getLoanType().toLowerCase().equals("approve")) {
+			ln.setLoanType("approve");
 			double emi = Integer.valueOf(loan.getLoanAmountRequired())/Integer.valueOf(loan.getLoanRepaymentMonths());
-	    	loan.setMonthlyEmi(emi);
-		}else {
-			loan.setMonthlyEmi(0);
+	    	ln.setMonthlyEmi(emi);
+		}else if(loan.getLoanType().toLowerCase().equals("reject")){
+			ln.setLoanType("reject");
+			ln.setMonthlyEmi(0);
 		}
-		
-    	return loanRepo.save(loan);
+		else {
+			ln.setLoanType("pending");
+			ln.setMonthlyEmi(0);
+		}
+        return loanRepo.save(ln);
     }
 	public byte[] verifyDocuments(DocumentModel data,HttpServletResponse request) {
 
-	        DocumentModel doc = docRepo.getLoanByLoanId(data.getLoan().getLoanId());
-	        System.out.println("Doc contains: ");
-	        System.out.println(doc);
+		int loanId = data.getLoan().getLoanId();
+		DocumentModel doc = docRepo.getLoanByLoanId(loanId);
+		request.setHeader("Content-Disposition", "attachment; filename=" + doc.getFileName());
+		return doc.getData();
+	
+}
 
-	        request.setHeader("Content-Disposition", "attachment; filename=" + doc.getFileName());
-	        return doc.getData();
-	    
-	}
+public String getFileName(int loanId, HttpServletResponse request) {
+
+	DocumentModel doc = docRepo.getLoanByLoanId(loanId);
+
+	request.setHeader("Content-Disposition", "attachment; filename=" + doc.getFileName());
+	return doc.getFileName();
+}
+
+public String getFileType(int loanId, HttpServletResponse request) {
+
+	DocumentModel doc = docRepo.getLoanByLoanId(loanId);
+
+	request.setHeader("Content-Disposition", "attachment; filename=" + doc.getFileName());
+	return doc.getFileType();
+}
 	public void editLoan(LoanApplicationModel loan, int id) {
 		LoanApplicationModel ln = loanRepo.getLoanByLoanId(id);
         ln.setLoanId(id);

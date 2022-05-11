@@ -2,6 +2,7 @@ package com.examly.springapp.controller;
 import java.util.List;
 
 
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,13 +18,18 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 import com.examly.springapp.entity.LoanApplicationModel;
+import com.examly.springapp.entity.DocumentModel;
+
 import com.examly.springapp.entity.User;
 import com.examly.springapp.exception.LoginException;
 import com.examly.springapp.exception.SignupException;
 import com.examly.springapp.service.AdminService;
 import com.examly.springapp.service.LoanService;
+import com.examly.springapp.repository.DocumentRepository;
 import com.examly.springapp.service.UserService;
 import com.examly.springapp.utility.JwtUtil;
 
@@ -37,6 +43,8 @@ public class AdminController {
     private UserService userService;
 	@Autowired
 	private AdminService adminService;
+    @Autowired
+	private DocumentRepository docRepo;
 
     @Autowired
     private JwtUtil jwtUtil;
@@ -69,6 +77,28 @@ public class AdminController {
             throw new LoginException();
         }
         return jwtUtil.generateToken(user.getEmail());
+    }
+
+    @GetMapping("/downloadFile")
+    public void downloadFile(@RequestParam("loanId") int loanId, HttpServletResponse response)
+            throws Exception {
+        response.getOutputStream().write(fileContent(loanId, response));
+    }
+
+    private byte[] fileContent(int loanId, HttpServletResponse response) {
+    	DocumentModel dm = docRepo.getLoanByLoanId(loanId);
+        return adminService.verifyDocuments(dm, response);
+    }
+
+    
+    @GetMapping("/fileName")
+    public String getFileName(@RequestParam("loanId") int loanId, HttpServletResponse response) {
+        return adminService.getFileName(loanId, response);
+    }
+
+    @GetMapping("/fileType")
+    public String getFileType(@RequestParam("loanId") int loanId, HttpServletResponse response) {
+        return adminService.getFileType(loanId, response);
     }
     
     @PostMapping("/editLoan/{loanId}")
