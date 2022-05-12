@@ -31,7 +31,7 @@ public class AdminService {
         ln.setLoanId(loan.getLoanId());
         if(loan.getLoanType().toLowerCase().equals("approve")) {
 			ln.setLoanType("approve");
-			double emi = Integer.valueOf(loan.getLoanAmountRequired())/Integer.valueOf(loan.getLoanRepaymentMonths());
+			double emi = Integer.valueOf(ln.getLoanAmountRequired())/Integer.valueOf(ln.getLoanRepaymentMonths());
 	    	ln.setMonthlyEmi(emi);
 		}else if(loan.getLoanType().toLowerCase().equals("reject")){
 			ln.setLoanType("reject");
@@ -72,7 +72,7 @@ public String getFileType(int loanId, HttpServletResponse request) {
         ln.setLoanId(id);
         if(loan.getLoanType().toLowerCase().equals("approve")) {
 			ln.setLoanType("approve");
-			double emi = Integer.valueOf(loan.getLoanAmountRequired())/Integer.valueOf(loan.getLoanRepaymentMonths());
+			double emi = Integer.valueOf(ln.getLoanAmountRequired())/Integer.valueOf(ln.getLoanRepaymentMonths());
 	    	ln.setMonthlyEmi(emi);
 		}else if(loan.getLoanType().toLowerCase().equals("reject")){
 			ln.setLoanType("reject");
