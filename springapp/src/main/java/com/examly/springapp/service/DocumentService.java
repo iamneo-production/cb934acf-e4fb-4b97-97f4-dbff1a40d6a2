@@ -30,7 +30,7 @@ public class DocumentService {
 
         DocumentModel doc = docRepo.getLoanByLoanId(loanId);
 
-        request.setHeader("Content-Disposition", "attachment; filename=" + doc.getFileName());
+        request.setHeader("Content-Disposition", "attachment; filename=\"" + doc.getFileName()+"\"");
         return doc.getFileName();
     }
 
@@ -38,7 +38,7 @@ public class DocumentService {
 
         DocumentModel doc = docRepo.getLoanByLoanId(loanId);
 
-        request.setHeader("Content-Disposition", "attachment; filename=" + doc.getFileName());
+        request.setHeader("Content-Disposition", "attachment; filename=\"" + doc.getFileName()+"\"");
         return doc.getFileType();
     }
 
@@ -46,7 +46,7 @@ public class DocumentService {
     public byte[] getFile(int loanId, HttpServletResponse request) {
 
         DocumentModel doc = docRepo.getLoanByLoanId(loanId);
-        request.setHeader("Content-Disposition", "attachment; filename=" + doc.getFileName());
+        request.setHeader("Content-Disposition", "attachment; filename=\"" + doc.getFileName()+"\"");
         return doc.getData();
     }
 

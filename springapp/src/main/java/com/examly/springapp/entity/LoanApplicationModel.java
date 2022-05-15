@@ -13,7 +13,7 @@ public class LoanApplicationModel {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int loanId;
 
-    private String loantype="pending";
+    private String loanType="pending";
     private String applicantName;
     private String applicantAddress;
     private String applicantMobile;
@@ -45,7 +45,7 @@ public class LoanApplicationModel {
 			double monthlyEmi) {
 		super();
 		this.loanId = loanId;
-		this.loantype = loanType;
+		this.loanType = loanType;
 		this.applicantName = applicantName;
 		this.applicantAddress = applicantAddress;
 		this.applicantMobile = applicantMobile;
@@ -70,11 +70,11 @@ public class LoanApplicationModel {
     }
 
     public String getLoanType() {
-        return loantype;
+        return loanType;
     }
 
     public void setLoanType(String loanType) {
-        this.loantype = loanType;
+        this.loanType = loanType;
     }
 
     public String getApplicantName() {
