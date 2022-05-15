@@ -24,17 +24,17 @@ export class AdminapprovedloanComponent implements OnInit {
 
   public logout(){
     this.userAuthService.clearLocalStorage();
-    this.router.navigateByUrl("admin/login");
+    this.router.navigateByUrl("user/login");
   }
   viewLoan(){
-    this.router.navigateByUrl("admin/viewLoan");
+    this.router.navigateByUrl("admin/appliedLoan");
   }
 
   trackLoan(){
     this.trackLoanService.trackLoan(this.loanId).subscribe(data=>{
       this.userAuthService.setLoanId(this.loanId)
       sessionStorage.setItem("userData",JSON.stringify(data))
-      this.router.navigateByUrl("user/viewLoan/status", {skipLocationChange:true});
+      this.router.navigateByUrl("admin/viewLoan", {skipLocationChange:true});
     },
     error=>{
       this.err=true

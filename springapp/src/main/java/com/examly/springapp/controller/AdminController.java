@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -68,7 +69,7 @@ public class AdminController {
         return jwtUtil.generateToken(user.getEmail());
     }
     
-    @PostMapping("/editLoan/{loanId}")
+    @PutMapping("/editLoan/{loanId}")
     public ResponseEntity<String> editLoan(@RequestBody LoanApplicationModel loan, @PathVariable("loanId") int id) {
         try {
             adminService.editLoan(loan, id);
@@ -113,7 +114,7 @@ public class AdminController {
     	}
     	return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
     }
-    @PostMapping("/editRepaymentSchedule/{loanId}")
+    @PutMapping("/editRepaymentSchedule/{loanId}")
     public ResponseEntity<String> editRepaymentSchedule(@RequestBody LoanApplicationModel loan, @PathVariable("loanId") int id) {
         try {
             adminService.editSchedule(loan, id);
@@ -122,7 +123,7 @@ public class AdminController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
-    @PostMapping("/deleteRepaymentSchedule/{loanId}")
+    @DeleteMapping("/deleteRepaymentSchedule/{loanId}")
     public ResponseEntity<String> deleteRepaymentSchedule(@PathVariable("loanId") int id) {
         try {
             adminService.deleteSchedule(id);

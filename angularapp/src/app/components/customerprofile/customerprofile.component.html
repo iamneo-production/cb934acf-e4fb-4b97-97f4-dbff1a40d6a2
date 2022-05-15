@@ -44,12 +44,11 @@
           </div>
           <div class="card-box">
             <span class="detaiils">Monthly EMI</span>
-            <input *ngIf="!monthlyEmi" type="text" readonly>
-            <input *ngIf="monthlyEmi" type="text" readonly value={{monthlyEmi}}>
+            <input type="text" readonly value={{monthlyEmi}}>
           </div>
         </div>
         <div class="text-center">
-          <button [disabled]="!monthlyEmi" type="button" (click)="downloadFile()" class="btn btn-danger my-3">Download File</button>
+          <button [disabled]="loanId===0 || loanid==='' || loanid===null" type="button" (click)="downloadFile()" class="btn btn-danger my-3">Download File</button>
         </div>
       </form>
       </div>

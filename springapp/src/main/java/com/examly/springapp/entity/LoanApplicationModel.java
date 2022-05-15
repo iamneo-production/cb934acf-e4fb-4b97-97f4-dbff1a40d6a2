@@ -14,7 +14,7 @@ public class LoanApplicationModel {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int loanId;
 
-    private String loanType;
+    private String loanType="pending";
     private String applicantName;
     private String applicantAddress;
     private String applicantMobile;

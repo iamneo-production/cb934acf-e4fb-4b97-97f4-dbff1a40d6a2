@@ -30,8 +30,14 @@
       <div class="row my-3">
         <div class="col-md-4 py-3"><strong>Applicant Email: </strong>{{applicantEmail}}</div>
         <div class="col-md-4 py-3"><strong>Applicant Aadhar: </strong>{{applicantAadhar}}</div>
-        <div class="col-md-4 py-3">
-          <button class="btn btn-secondary">Pending</button>
+        <div *ngIf="button==='pending'" class="col-md-4 py-3">
+          <strong>Loan Status: </strong><button class="btn btn-info">Pending</button>
+        </div>
+        <div *ngIf="button==='approve'" class="col-md-4 py-3">
+          <strong>Loan Status: </strong><button class="btn btn-success">Approved</button>
+        </div>
+        <div *ngIf="button==='reject'" class="col-md-4 py-3">
+          <strong>Loan Status: </strong><button class="btn btn-danger">Rejected</button>
         </div>
       </div>
     </div>

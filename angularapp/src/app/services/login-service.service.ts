@@ -16,6 +16,10 @@ export class LoginServiceService {
     return this.http.post("https://8080-dffeebcffadededbccaaaccbedcbadfbddbcdbd.examlyiopb.examly.io/user/login",user,{responseType: 'text' as 'json'})
   }
 
+  public generateTokenAdmin(user:User){
+    return this.http.post("https://8080-dffeebcffadededbccaaaccbedcbadfbddbcdbd.examlyiopb.examly.io/admin/login",user,{responseType: 'text' as 'json'})
+  }
+
   public registerUserFormRemoteServer(user:User):Observable<any>{
     return this.http.post<any>("https://8080-dffeebcffadededbccaaaccbedcbadfbddbcdbd.examlyiopb.examly.io/user/signup",user)
       .pipe(catchError(this.errorHandler));

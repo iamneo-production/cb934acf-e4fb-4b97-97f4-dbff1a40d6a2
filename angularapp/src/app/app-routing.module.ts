@@ -42,12 +42,23 @@ const routes: Routes = [
     canActivate: [AuthGuardGuard]
   },
   {
+    path: 'admin/login',
+    loadChildren: ()=>import('./components/admin-login/admin-login.module').then(m=>m.AdminLoginModule)
+  },
+  {
     path: 'admin/appliedLoan',
-    loadChildren: ()=>import('./components/adminappliedloan/adminappliedloan.module').then(m=>m.AdminappliedloanModule)
+    loadChildren: ()=>import('./components/adminappliedloan/adminappliedloan.module').then(m=>m.AdminappliedloanModule),
+    canActivate: [AuthGuardGuard]
   },
   {
     path: 'admin/trackLoan',
-    loadChildren: ()=>import('./components/adminapprovedloan/adminapprovedloan.module').then(m=>m.AdminapprovedloanModule)
+    loadChildren: ()=>import('./components/adminapprovedloan/adminapprovedloan.module').then(m=>m.AdminapprovedloanModule),
+    canActivate: [AuthGuardGuard]
+  },
+  {
+    path: 'admin/viewLoan',
+    loadChildren: ()=>import('./components/admin-view-loan/admin-view-loan.module').then(m=>m.AdminViewLoanModule),
+    canActivate: [AuthGuardGuard]
   }
 ];
 

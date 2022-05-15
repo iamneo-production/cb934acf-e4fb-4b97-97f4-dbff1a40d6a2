@@ -43,6 +43,7 @@
     text-decoration: none;
     color: #fff;
     text-transform: uppercase;
+    cursor:pointer;
   }
 
   .navbar ul li::after{
@@ -64,10 +65,13 @@
     color:whitesmoke;
     margin-top:110px;
     width:100%;
-    background-color:dimgrey;
+    background-color:gray;
     position: relative;
+    border-radius: 10px;
   }
 
-
+.btn{
+  padding: 10px 50px;
+}
 
 

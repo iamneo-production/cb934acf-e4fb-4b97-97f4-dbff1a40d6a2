@@ -44,6 +44,10 @@ export class LoginComponent implements OnInit {
     this.getAccessToken(this.user);
   }
 
+  adminPage(){
+    this.router.navigateByUrl("admin/login")
+  }
+
   public getAccessToken(user:any){
     let resp=this.loginService.generateToken(user);
     resp.subscribe(data=>{

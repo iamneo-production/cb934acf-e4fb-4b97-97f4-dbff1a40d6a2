@@ -39,11 +39,7 @@
             </ul>
           </div>-->
           <div class="col-md-4 py-3">
-              <select>
-                  <option value="Pending" style="background-color:darkslategrey;">Pending</option>
-                  <option value="Approve"  style="background-color: green; color:whitesmoke;" (click)="approveLoan">Approve for loan</option>
-                  <option value="Reject" style="background-color: red; color:whitesmoke;" (click)="rejectLoan">Reject</option>
-              </select>
+            <button type="button" (click)="downloadFile(loan.loanId)" class="btn btn-info">Download Document</button>
           </div>
         </div>
       </div>

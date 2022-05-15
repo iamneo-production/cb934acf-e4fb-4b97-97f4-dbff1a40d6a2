@@ -11,6 +11,10 @@ import { CustomerapplyloanModule } from './components/customerapplyloan/customer
 import { LoanIdModule } from './components/loan-id/loan-id.module';
 import { ViewLoanModule } from './components/view-loan/view-loan.module';
 import { TrackLoanModule } from './components/track-loan/track-loan.module';
+import { AdminappliedloanModule } from './components/adminappliedloan/adminappliedloan.module';
+import { AdminapprovedloanModule } from './components/adminapprovedloan/adminapprovedloan.module';
+import { AdminViewLoanModule } from './components/admin-view-loan/admin-view-loan.module';
+import { AdminLoginModule } from './components/admin-login/admin-login.module';
 
 @NgModule({
   declarations: [
@@ -27,7 +31,11 @@ import { TrackLoanModule } from './components/track-loan/track-loan.module';
     CustomerapplyloanModule,
     LoanIdModule,
     ViewLoanModule,
-    TrackLoanModule
+    TrackLoanModule,
+    AdminappliedloanModule,
+    AdminapprovedloanModule,
+    AdminViewLoanModule,
+    AdminLoginModule
   ],
   providers: [
     

@@ -5,6 +5,14 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
+  }
+
+  .admin{
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    width: 100%;
   }
   
   .row{

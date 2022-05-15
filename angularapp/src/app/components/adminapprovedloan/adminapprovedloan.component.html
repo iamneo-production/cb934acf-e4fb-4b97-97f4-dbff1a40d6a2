@@ -16,6 +16,10 @@
     </nav>
 
     <div class="content">
+      <div *ngIf="err && status===500" class="alert alert-danger my-5" role="alert">
+        <strong>An Error Occured </strong>{{msg}}
+      </div>
+      
       <div class="col">
         <input type="text" placeholder="Enter  Loan ID to search" [(ngModel)]="loanId">
       </div>

@@ -21,6 +21,8 @@ export class ViewLoanComponent implements OnInit {
   loanAmountRequired:string=''
   loanId:number=0
   loanRepaymentMonths:string=''
+  loanType:string=''
+  button:string='pending'
 
   user=new User()
   id=0
@@ -39,8 +41,14 @@ export class ViewLoanComponent implements OnInit {
     this.applicantSalary=this.getUserData.applicantSalary
     this.loanAmountRequired=this.getUserData.loanAmountRequired
     this.loanId=this.getUserData.loanId
-    let loanAmount=+this.loanAmountRequired
-    this.loanRepaymentMonths=(Math.floor(loanAmount/12)).toString()
+    this.loanType=this.getUserData.loanType
+
+    if(this.loanType==='Approve'){
+      this.button='approve'
+    }
+    else if(this.loanType==='Reject'){
+      this.button='reject'
+    }
   }
 
   public logout(){
@@ -60,5 +68,5 @@ export class ViewLoanComponent implements OnInit {
     this.router.navigateByUrl("user/getProfile")
   }
 
-
+  
 }

@@ -23,8 +23,8 @@ export class CustomerprofileComponent implements OnInit {
   applicantSalary:string=''
   loanAmountRequired:number=0
   loanRepaymentMonths:number=0
-  loanId:number=0
   monthlyEmi:number=0
+  loanId:number=0
   showButton:boolean=true
 
   loan=new Loan()
@@ -49,8 +49,7 @@ export class CustomerprofileComponent implements OnInit {
     this.applicantSalary=this.getUserData.applicantSalary
     this.loanAmountRequired=this.ConvertStringToNumber(this.getUserData.loanAmountRequired)
     this.loanId=this.getUserData.loanId
-    this.loanRepaymentMonths=this.ConvertStringToNumber(this.getUserData.loanRepaymentMonths)
-    this.monthlyEmi=Math.floor(this.loanAmountRequired/this.loanRepaymentMonths)
+    this.monthlyEmi=this.getUserData.monthlyEmi
 
     this.loanid=sessionStorage.getItem("loanId")
 
