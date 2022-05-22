@@ -35,8 +35,8 @@ import com.examly.springapp.utility.JwtUtil;
 
 @RestController
 @RequestMapping("/admin")
-@CrossOrigin(origins = "http://localhost:8081")
-// @CrossOrigin(origins = "https://8081-dffeebcffadededbccaaaccbedcbadfbddbcdbd.examlyiopb.examly.io")
+// @CrossOrigin(origins = "http://localhost:8081")
+@CrossOrigin(origins = "https://8081-cdbbedcbcededbccaaaccbedcbadfbddbcdbd.examlyiopb.examly.io")
 public class AdminController {
    
     @Autowired
