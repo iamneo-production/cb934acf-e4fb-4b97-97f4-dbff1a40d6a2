@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/user")
-// @CrossOrigin(origins = "http://localhost:8081")
+//@CrossOrigin(origins = "http://localhost:8081")
 @CrossOrigin(origins = "https://8081-cdbbedcbcededbccaaaccbedcbadfbddbcdbd.examlyiopb.examly.io")
 public class SignupController {
     @Autowired
@@ -53,6 +53,8 @@ public class SignupController {
         }
         return jwtUtil.generateToken(user.getEmail());
     }
+
+
 }
 
 

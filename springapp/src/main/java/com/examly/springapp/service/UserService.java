@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
+import org.springframework.security.core.context.SecurityContextHolder;
 import com.examly.springapp.entity.User;
 import com.examly.springapp.repository.UserRepo;
 
@@ -13,6 +13,11 @@ import com.examly.springapp.repository.UserRepo;
 public class UserService {
     @Autowired
     private UserRepo userRepo;
+
+    public User getCurrentUser() {
+		String email = SecurityContextHolder.getContext().getAuthentication().getName();
+        return userRepo.getUserByEmail(email);
+	}
 
     public User saveUser(User user) {
         return this.userRepo.save(user);

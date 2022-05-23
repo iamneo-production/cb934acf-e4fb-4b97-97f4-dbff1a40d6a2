@@ -22,7 +22,7 @@ import com.examly.springapp.service.UserService;
 @RestController
 @RequestMapping("/user")
 @CrossOrigin(origins = "https://8081-cdbbedcbcededbccaaaccbedcbadfbddbcdbd.examlyiopb.examly.io")
-// @CrossOrigin(origins = "http://localhost:8081")
+//@CrossOrigin(origins = "http://localhost:8081")
 public class UserController {
 
     @Autowired
@@ -44,6 +44,16 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.OK).body(u);
         }
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+    }
+
+    @GetMapping("/getCurrentUser")
+    public ResponseEntity<User> getCurrentUser(){
+    	try {
+    		User u = userService.getCurrentUser();
+    		return ResponseEntity.status(HttpStatus.OK).body(u);
+    	}catch(NullPointerException e) {
+    		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+    	}
     }
 
     @PostMapping("/addProfile")

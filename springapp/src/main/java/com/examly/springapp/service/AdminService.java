@@ -26,6 +26,13 @@ public class AdminService {
 	@Autowired
 	private DocumentRepository docRepo;
 	
+
+	public User getCurrentUser() {
+		String email = SecurityContextHolder.getContext().getAuthentication().getName();
+        return userRepo.getUserByEmail(email);
+	}
+
+
 	public LoanApplicationModel approveLoan(LoanApplicationModel loan) {
 		LoanApplicationModel ln = loanRepo.getLoanByLoanId(loan.getLoanId());
         ln.setLoanId(loan.getLoanId());

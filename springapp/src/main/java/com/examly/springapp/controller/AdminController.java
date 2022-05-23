@@ -35,7 +35,7 @@ import com.examly.springapp.utility.JwtUtil;
 
 @RestController
 @RequestMapping("/admin")
-// @CrossOrigin(origins = "http://localhost:8081")
+//@CrossOrigin(origins = "http://localhost:8081")
 @CrossOrigin(origins = "https://8081-cdbbedcbcededbccaaaccbedcbadfbddbcdbd.examlyiopb.examly.io")
 public class AdminController {
    
@@ -77,6 +77,16 @@ public class AdminController {
             throw new LoginException();
         }
         return jwtUtil.generateToken(user.getEmail());
+    }
+
+    @GetMapping("/getCurrentUser")
+    public ResponseEntity<User> getCurrentUser(){
+    	try {
+    		User u = adminService.getCurrentUser();
+    		return ResponseEntity.status(HttpStatus.OK).body(u);
+    	}catch(NullPointerException e) {
+    		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+    	}
     }
 
     @GetMapping("/downloadFile")
